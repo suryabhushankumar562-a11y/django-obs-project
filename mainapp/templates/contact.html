@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact page{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Sirf is page ka CSS yahan */
+      body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, #f6d365, #fda085, #a1c4fd, #c2e9fb);
+      background-size: 100% 200%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      flex-direction: column;
+      height: 400px;!important
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .main-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      //padding: 30px 15px;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 600px;
+      animation: slideUp 1s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .login-logo i {
+      font-size: 48px;
+      color: #27ae60;
+    }
+
+    .login-card h4 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .login-card p {
+      text-align: center;
+      color: #636e72;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      border-radius: 0;
+      border: none;
+      border-bottom: 2px solid #ccc;
+      background: transparent;
+      box-shadow: none;
+      margin-bottom: 20px;
+    }
+
+    .form-control:focus {
+      border-color: #27ae60;
+      box-shadow: none;
+      outline: none;
+    }
+
+    .btn-dark {
+      background-color: #2d3436;
+      border: none;
+    }
+
+    .btn-dark:hover {
+      background-color: #000;
+      transform: scale(1.05);
+      transition: all 0.3s ease-in-out;
+    }
+
+    footer {
+      color: #fff;
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: auto;
+    }
+
+    footer a {
+      color: #81ecec;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Login form ya page content yahan daal do -->
+
+<!-- Contact Form Styled -->
+<div class="main-container">
+  <div class="login-card">
+    <div class="login-logo">
+      <i class="fas fa-envelope"></i>
+    </div>
+    <h4>Contact Us</h4>
+    <p>We'd love to hear from you</p>
+
+    {% if messages %}
+      {% for m in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ m }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Your Name" class="form-control" required>
+      <input type="text" name="contactno" placeholder="Contact Number" class="form-control" required>
+      <input type="email" name="email" placeholder="Email Address" class="form-control" required>
+      <input type="text" name="subject" placeholder="Subject" class="form-control" required>
+      <textarea name="message" placeholder="Your Message" rows="4" class="form-control" required></textarea>
+      <button type="submit" class="btn btn-dark w-100 mt-3">Send Message</button>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

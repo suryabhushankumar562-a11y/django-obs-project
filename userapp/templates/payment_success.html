@@ -1,0 +1,98 @@
+{% extends "userbase.html" %}
+
+{% block user %}
+<style>
+    .success-container {
+        max-width: 700px;
+        margin: 50px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        text-align: center;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .success-container h1 {
+        color: #28a745;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .success-container p {
+        font-size: 1.2rem;
+        margin: 10px 0;
+        color: #555;
+    }
+
+    .order-items {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    .order-items h2 {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .order-items ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .order-items li {
+        background: #f8f9fa;
+        margin: 8px 0;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: #444;
+        transition: 0.3s;
+    }
+
+    .order-items li:hover {
+        background: #e9f7ef;
+        transform: translateX(5px);
+    }
+
+    .btn-home {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 12px 25px;
+        background: #007bff;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: 0.3s;
+    }
+
+    .btn-home:hover {
+        background: #0056b3;
+        transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="success-container">
+    <h1>🎉 Payment Successful!</h1>
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Total Amount:</strong> ₹{{ total_amount }}</p>
+
+    <div class="order-items">
+        <h2>🛍️ Order Items</h2>
+        <ul>
+            {% for item in order_items %}
+                <li>{{ item.book.title }} × {{ item.quantity }} = ₹{{ item.total_price }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a href="{% url 'index' %}" class="btn-home">🏠 Go back to Home</a>
+</div>
+{% endblock %}

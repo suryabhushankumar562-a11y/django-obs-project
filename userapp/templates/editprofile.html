@@ -1,0 +1,90 @@
+{% extends 'userbase.html' %}
+{% block user %}
+<div class="row justify-content-center my-4" 
+     style="min-height: 100vh; padding: 40px 0; background: linear-gradient(135deg, #f6d365, #fda085, #a1c4fd, #c2e9fb);">
+  <div class="col-md-8">
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden" 
+         style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+      
+      <!-- Header -->
+      <div class="p-4 text-center">
+        <h2 class="fw-bold mb-0">Edit Profile</h2>
+      </div>
+
+      <!-- Form Section -->
+      <div class="card-body p-4">
+        <form method="post" class="row g-4" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <!-- Name -->
+          <div class="col-md-6">
+            <label for="n" class="form-label fw-semibold">Full Name</label>
+            <input type="text" name="name" id="n" class="form-control shadow-sm rounded-3"
+                   value="{{ user.name }}" required>
+          </div>
+
+          <!-- Contact -->
+          <div class="col-md-6">
+            <label for="cn" class="form-label fw-semibold">Contact No.</label>
+            <input type="text" name="contactno" id="cn" class="form-control shadow-sm rounded-3"
+                   value="{{ user.contactno }}" required>
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6">
+            <label for="email" class="form-label fw-semibold">Email</label>
+            <input type="email" name="email" id="email" class="form-control shadow-sm rounded-3"
+                   value="{{ user.email }}" readonly>
+          </div>
+
+          <!-- Upload Photo -->
+          <div class="col-md-6">
+            <label for="profile" class="form-label fw-semibold">Upload Profile Photo</label>
+            <input type="file" name="profile" id="profile" 
+                   class="form-control shadow-sm rounded-3">
+          </div>
+
+          <!-- Address -->
+          <div class="col-12">
+            <label for="add" class="form-label fw-semibold">Address</label>
+            <textarea name="address" id="add" rows="3" 
+                      class="form-control shadow-sm rounded-3"
+                      required>{{ user.address }}</textarea>
+          </div>
+
+          <!-- Submit -->
+          <div class="text-center mt-3">
+            <button type="submit" class="btn btn-gradient btn-lg px-5 shadow">
+              💾 Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .btn-gradient {
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    color: white;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+  }
+  .btn-gradient:hover {
+    background: linear-gradient(90deg, #0072ff, #00c6ff);
+    transform: scale(1.05);
+    color: #fff;
+  }
+
+  .form-control {
+    border: 1px solid #ddd;
+    transition: 0.3s;
+  }
+  .form-control:focus {
+    border-color: #00c6ff;
+    box-shadow: 0 0 8px rgba(0, 198, 255, 0.3);
+  }
+</style>
+{% endblock %}

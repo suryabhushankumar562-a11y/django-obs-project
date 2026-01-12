@@ -1,0 +1,21 @@
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+        <div class="glass-card">
+            <h3>Edit Category</h3>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label>Category Name</label>
+                    <input type="text" name="name" class="form-control" value="{{ category.name }}" required>
+                </div>
+                <div class="mb-4">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control" rows="5" required>{{ category.description }}</textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn-glass">Update Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

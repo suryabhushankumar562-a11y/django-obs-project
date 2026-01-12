@@ -1,0 +1,153 @@
+{% extends 'userbase.html' %}
+{% load static %}
+{% block user %}
+<style>
+  .card-box {
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+
+  .card-box:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-footer-label {
+    font-size: 14px;
+    padding: 6px 0;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 0 0 12px 12px;
+    color: #fff;
+  }
+
+  .label-yellow { background-color: #ffc107; }
+  .label-red { background-color: #f44336; }
+  .label-green { background-color: #4caf50; }
+  .label-blue { background-color: #2196f3; }
+</style>
+
+<div class="container-fluid py-4">
+  <div class="row g-4">
+
+    <!-- Earnings -->
+    <div class="col-md-3">
+      <div class="card card-box text-center">
+        <div class="card-body">
+          <h4 class="mb-1 text-warning fw-bold">$30200</h4>
+          <p class="text-muted mb-0">All Earnings</p>
+        </div>
+        <div class="card-footer-label label-yellow">10% changes on profit</div>
+      </div>
+    </div>
+
+    <!-- Tasks -->
+    <div class="col-md-3">
+      <div class="card card-box text-center">
+        <div class="card-body">
+          <h4 class="mb-1 text-danger fw-bold">145</h4>
+          <p class="text-muted mb-0">Tasks</p>
+        </div>
+        <div class="card-footer-label label-red">28% task performance</div>
+      </div>
+    </div>
+
+    <!-- Page Views -->
+    <div class="col-md-3">
+      <div class="card card-box text-center">
+        <div class="card-body">
+          <h4 class="mb-1 text-success fw-bold">290+</h4>
+          <p class="text-muted mb-0">Page Views</p>
+        </div>
+        <div class="card-footer-label label-green">10k daily views</div>
+      </div>
+    </div>
+
+    <!-- Downloads -->
+    <div class="col-md-3">
+      <div class="card card-box text-center">
+        <div class="card-body">
+          <h4 class="mb-1 text-primary fw-bold">500</h4>
+          <p class="text-muted mb-0">Downloads</p>
+        </div>
+        <div class="card-footer-label label-blue">1k download in App store</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Sales & Revenue (Placeholder Cards) -->
+  <div class="row mt-4 g-4">
+    <div class="col-md-6">
+      <div class="card card-box">
+        <div class="card-body">
+          <h5 class="mb-3">Sales Per Day</h5>
+          <p class="text-muted">[Graph placeholder or chart]</p>
+          <div class="d-flex justify-content-between">
+            <h4>$4230</h4>
+            <span>321 Today Sales</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card card-box">
+        <div class="card-body">
+          <h5 class="mb-3">Total Revenue</h5>
+          <p class="text-muted">[Chart placeholder]</p>
+          <ul class="list-unstyled">
+            <li><span class="badge bg-danger">Youtube</span></li>
+            <li><span class="badge bg-primary">Facebook</span></li>
+            <li><span class="badge bg-info">Twitter</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Traffic Sources -->
+  <div class="row mt-4 g-4">
+    <div class="col-md-12">
+      <div class="card card-box">
+        <div class="card-body">
+          <h5 class="mb-4">Traffic Sources</h5>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between">
+              <span>Direct</span><span>80%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar bg-primary" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between">
+              <span>Social</span><span>50%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar bg-secondary" style="width: 50%"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between">
+              <span>Referral</span><span>20%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar bg-success" style="width: 20%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between">
+              <span>Bounce</span><span>60%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-bar bg-danger" style="width: 60%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

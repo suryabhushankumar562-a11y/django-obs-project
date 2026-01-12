@@ -1,0 +1,169 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+{% block admin %}
+
+<style>
+    body {
+        background: linear-gradient(270deg, #f6d365, #fda085, #a1c4fd, #c2e9fb);
+        background-size: 800% 800%;
+        animation: bgShift 15s ease infinite;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    @keyframes bgShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 0.8s ease;
+        margin-top: 30px;
+    }
+
+    .glass-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+        transition: all 0.4s ease-in-out;
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    h3 {
+        text-align: center;
+        font-weight: 700;
+        font-size: 28px;
+        color: white;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    }
+
+    label {
+        font-weight: 600;
+        color: white;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.9);
+        transition: all 0.3s ease;
+        padding: 10px 14px;
+    }
+
+    .form-control:focus {
+        border-color: #2575fc;
+        box-shadow: 0 0 0 4px rgba(37, 117, 252, 0.3);
+    }
+
+    .btn-glass {
+        background: linear-gradient(to right, #ff6a00, #ee0979);
+        color: white;
+        padding: 12px 32px;
+        border: none;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 20px rgba(255, 106, 0, 0.4);
+    }
+
+    .btn-glass:hover {
+        background: linear-gradient(to right, #43cea2, #185a9d);
+        box-shadow: 0 10px 30px rgba(67, 206, 162, 0.5);
+        transform: scale(1.06);
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-11">
+            <h3>Add New Book</h3>
+            <div class="glass-card">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="t">Book Title </label>
+                        <input type="text" name="title" id="t" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="auth">Author</label>
+                        <input type="text" name="author" id="auth" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="cat">Category</label>
+                        <select name="category" id="cat" class="form-control" required>
+                            <option value="" disabled selected>---Select Category---</option>
+                            {% for c in cats %}
+                            <option value="{{ c.id }}">{{ c.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="d">Description</label>
+                        <textarea name="description" id="d" class="form-control"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="op">Tag Price</label>
+                        <input type="number" name="original_price" step="0.01" id="op" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="p">Selling Price</label>
+                        <input type="number" name="price" step="0.01" id="p" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pd">Published Date</label>
+                        <input type="date" name="published_date" id="pd" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="lan">Language</label>
+                        <input type="text" name="language" id="lan" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="ci">Cover Image</label>
+                        <input type="file" name="cover_image" id="ci" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="st">Stock</label>
+                        <input type="number" name="stock" id="st" class="form-control">
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn-glass">Add Book</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

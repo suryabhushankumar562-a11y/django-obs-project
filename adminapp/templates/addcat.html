@@ -1,0 +1,159 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+{% block admin %}
+<!--div class="row">
+    <div class="col-sm-12">
+        <h3>Add New Category</h3>
+
+    </div>
+    <div class="col-sm-8 mx-auto ">
+        <div class="card p-4 shadow">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+            <label for="n" class="form-lable">Category Name</label>
+            <input type="text" name="name" id="n" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="desc" class="form-lable"> Description</label>
+                    <textarea name="description" id="desc" class="form-control" style="height: 300px;"></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success mt-4">Add Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div-->
+
+
+
+
+
+
+<style>
+    body {
+        background: linear-gradient(to right, #e0eafc, #cfdef3);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 0.8s ease;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+        transition: all 0.4s ease-in-out;
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    h3 {
+        text-align: center;
+        font-weight: 700;
+        font-size: 26px;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    label {
+        font-weight: 600;
+        color: #34495e;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        border: 1.5px solid #dcdde1;
+        background-color: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+        padding: 10px 14px;
+    }
+
+    .form-control:focus {
+        border-color: #1abc9c;
+        box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.2);
+    }
+
+    .btn-glass {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: white;
+        padding: 12px 32px;
+        border: none;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(106, 17, 203, 0.3);
+    }
+
+    .btn-glass:hover {
+        background: linear-gradient(to right, #ff416c, #ff4b2b);
+        box-shadow: 0 10px 30px rgba(255, 75, 43, 0.4);
+        transform: scale(1.05);
+    }
+
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+        <div class="glass-card">
+            <h3>Add New Category</h3>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="n">Category Name</label>
+                    <input type="text" name="name" id="n" class="form-control" placeholder="e.g. Novels, Self-help" required>
+                </div>
+                <div class="mb-4">
+                    <label for="desc">Description</label>
+                    <textarea name="description" id="desc" class="form-control" rows="5" placeholder="Short description..." required></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn-glass">Add Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Footer Start -->
+<footer class="text-center mt-5 py-4" style="
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 15px;
+    color: #2f3542;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+">
+    <div>
+        &copy; {{ year|default:2025 }} <strong>OBS Admin Panel</strong> — Designed by <span style="color:#1e90ff;">Ravi Bhushan</span> 
+    </div>
+</footer>
+<!-- Footer End -->
+    
+</div>
+
+
+
+
+
+{% endblock %}

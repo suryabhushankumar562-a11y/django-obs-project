@@ -1,0 +1,108 @@
+{% extends 'userbase.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <style>
+    body {
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5); /* soft gradient */
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-weight: bold;
+      color: #222;   /* dark heading */
+      margin-bottom: 40px;
+      text-align: center;
+      text-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .dashboard-card {
+      background: rgba(255, 255, 255, 0.85);  /* white card with transparency */
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      color: #222;   /* default text darker */
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .card-icon {
+      font-size: 45px;
+      color: #6c5ce7;  /* purple icons */
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .dashboard-card:hover .card-icon {
+      color: #00b894;  /* green hover */
+      transform: scale(1.2);
+    }
+
+    .card-info {
+      font-size: 15px;
+      color: #444;   /* darker for readability */
+    }
+
+    .container {
+      max-width: 1200px;
+    }
+  </style>
+{% endblock %}
+
+{% block user %}
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Welcome {{ name }}</h1>
+  </div>
+</div>
+
+<div class="container py-4">
+  <div class="row g-4">
+
+    <div class="col-md-3">
+      <div class="dashboard-card">
+        <i class="ti ti-box card-icon"></i>
+        <h5 class="mt-2">My Orders</h5>
+        <p class="card-info">Track your recent orders</p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="dashboard-card">
+        <i class="ti ti-shopping-cart card-icon"></i>
+        <h5 class="mt-2">Cart</h5>
+        <p class="card-info">Items waiting to checkout</p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="dashboard-card">
+        <i class="ti ti-settings card-icon"></i>
+        <h5 class="mt-2">Preferences</h5>
+        <p class="card-info">Customize your settings</p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="dashboard-card">
+        <i class="ti ti-heart card-icon"></i>
+        <h5 class="mt-2">Wishlist</h5>
+        <p class="card-info">Saved items for later</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

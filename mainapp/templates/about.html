@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About page{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Sirf is page ka CSS yahan */
+  body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg,#f6d365, #fda085, #a1c4fd, #c2e9fb);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .about-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      margin: 60px auto;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    h2.section-title {
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 40px;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .about-img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .green-check {
+      color: #00ffae;
+      font-weight: 500;
+    }
+
+    .btn-custom {
+      background-color: #2ebf91;
+      color: white;
+      border: none;
+    }
+
+    .team-member {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 20px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    .team-member:hover {
+      transform: scale(1.05);
+    }
+
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .team-member h5 {
+      margin: 0;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .team-member p {
+      font-size: 0.9rem;
+      color: #00ffc8;
+    }
+
+    p, li {
+      color: #f8f9fa;
+    }
+
+    h4, h5 {
+      color: #ffffff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Login form ya page content yahan daal do -->
+  <div class="about-container">
+    <h2 class="section-title text-dark">About Our Bookstore</h2>
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6">
+        <img src="{% static 'img/girl_with_book.jpg' %}" alt="Open Book" class="about-img" style="height:400px;">
+      </div>
+      <div class="col-md-6">
+        <h4 style="color:black;"><strong>Our Story</strong></h4>
+        <p>Founded in 2010, our online bookstore began as a small passion project between friends who shared a love for literature.</p>
+
+        <h4 class="mt-4" style="color:black;"><strong>Our Mission</strong></h4>
+        <p>We believe in the transformative power of books. Our mission is to connect readers with stories that inspire, educate, and entertain.</p>
+
+        <h5 class="mt-4" style="color:black;"><strong>Why Choose Us?</strong></h5>
+        <ul class="list-unstyled">
+          <li class="green-check">✔ Curated selection of 100,000+ titles</li>
+          <li class="green-check">✔ Competitive prices & offers</li>
+          <li class="green-check">✔ Fast worldwide shipping</li>
+          <li class="green-check">✔ Friendly support staff</li>
+          <li class="green-check">✔ Eco-friendly packaging</li>
+        </ul>
+
+        <button class="btn btn-custom mt-3 text-dark">Get In Touch</button>
+      </div>
+    </div>
+
+    <h3 class="text-center text-dark mb-4">Meet Our Team</h3>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-3 col-sm-6">
+        <div class="team-member">
+          <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Shubham">
+          <h5>Aditya Shukla</h5>
+          <p>Founder & CEO</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="team-member">
+          <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Rituraj">
+          <h5>Savi Kumar</h5>
+          <p>Head of Acquisitions</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="team-member">
+          <img src="https://randomuser.me/api/portraits/men/4.jpg" alt="Prasoon">
+          <h5>Deepak Kumar</h5>
+          <p>Acquisition Team</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="team-member">
+          <img src="https://randomuser.me/api/portraits/women/5.jpg" alt="Nausheen">
+          <h5>Satyajeet Pandey</h5>
+          <p>Customer Experience</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="team-member">
+          <img src="https://randomuser.me/api/portraits/men/6.jpg" alt="Priyansu">
+          <h5>Anup Pandey</h5>
+          <p>Marketing & Outreach</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

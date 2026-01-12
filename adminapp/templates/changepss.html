@@ -1,0 +1,148 @@
+{% extends 'adminbase.html' %}
+
+{% block admin %}
+<div class="row">
+  <div class="col-sm-8 mx-auto">
+
+    <title>Change Password</title>
+
+    <!-- ==== CSS ==== -->
+    <style>
+      body {
+        background: linear-gradient(-45deg, #74ebd5, #ACB6E5, #89f7fe, #66a6ff);
+        background-size: 400% 400%;
+        animation: gradientBG 10s ease infinite;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .card-custom {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 15px;
+      }
+
+      .card-custom:hover {
+        transform: scale(1.03);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-header {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+
+      .form-group {
+        position: relative;
+        margin-bottom: 2rem;
+      }
+
+      .form-icon {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        color: #0072ff;
+        font-size: 18px;
+      }
+
+      .form-control {
+        border: 1px solid #ccc;
+        border-radius: 30px;
+        padding: 12px 20px 12px 45px;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-control:focus {
+        border-color: #0072ff;
+        box-shadow: 0 0 8px rgba(0, 114, 255, 0.3);
+        outline: none;
+      }
+
+      .form-floating-label {
+        position: absolute;
+        left: 45px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all 0.2s ease;
+        pointer-events: none;
+        color: #777;
+        background: #f8f9fa;
+        padding: 0 5px;
+      }
+
+      .form-control:focus + .form-floating-label,
+      .form-control:not(:placeholder-shown) + .form-floating-label {
+        top: -10px;
+        left: 40px;
+        font-size: 12px;
+        color: #0072ff;
+      }
+
+      .btn-animated {
+        transition: all 0.3s ease;
+        border-radius: 30px;
+        font-weight: bold;
+      }
+
+      .btn-animated:hover {
+        background-color: #28a745 !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+
+    <!-- ==== Change Password Form ==== -->
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card card-custom shadow-lg border-0">
+            <div class="card-header text-white text-center" style="background: linear-gradient(to right, #00c6ff, #0072ff);">
+              <h4 class="mb-0"><i class="fas fa-key me-2"></i>Change Password</h4>
+            </div>
+            <div class="card-body bg-light">
+              <form method="POST">
+                {% csrf_token %}
+
+                <!-- Old Password -->
+                <div class="form-group">
+                  <i class="fas fa-lock form-icon"></i>
+                  <input type="password" class="form-control" id="oldpwd" name="oldpwd" placeholder=" " required>
+                  <label for="oldpwd" class="form-floating-label">Current Password</label>
+                </div>
+
+                <!-- New Password -->
+                <div class="form-group">
+                  <i class="fas fa-lock-open form-icon"></i>
+                  <input type="password" class="form-control" id="newpwd" name="newpwd" placeholder=" " required>
+                  <label for="newpwd" class="form-floating-label">New Password</label>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                  <i class="fas fa-check form-icon"></i>
+                  <input type="password" class="form-control" id="confirmpwd" name="confirmpwd" placeholder=" " required>
+                  <label for="confirmpwd" class="form-floating-label">Confirm New Password</label>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 btn-animated">
+                  <i class="fas fa-sync-alt me-1"></i>Change Password
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==== FontAwesome CDN for icons ==== -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  </div>
+</div>
+{% endblock %}

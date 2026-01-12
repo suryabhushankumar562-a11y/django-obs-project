@@ -1,0 +1,425 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Index Page{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* ===== Background Image with Text ===== */
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #wall {
+    background-image: url("{% static 'img/wall_bg.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    /* color: white; */
+    text-shadow: 1px 1px 4px black;
+  }
+  #fix {
+    background-image: url("{% static 'img/fixed.jpg' %}");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    /* color: white; */
+    text-shadow: 1px 1px 4px black;
+  }
+</style>
+
+<!-- Font Awesome Icons (For features section) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<div class="hero-section">
+  <div class="hero-content text-dark" id="wall">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1>Welcome to Our Bookstore</h1>
+        <p>Find your next favorite book</p>
+      </div>
+
+      <div class="col-sm-6 mx-auto mt-5">
+        <!-- Carousel Start -->
+        <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for i in "123"|make_list %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <div class="d-flex justify-content-center">
+                <div class="card mx-3" style="width: 18rem;">
+                  <img src="{% static 'img/s1.jpg' %}" class="card-img-top" alt="Book 1">
+                </div>
+                <div class="card mx-3" style="width: 18rem;">
+                  <img src="{% static 'img/s2.jpg' %}" class="card-img-top" alt="Book 2">
+                </div>
+                <div class="card mx-3" style="width: 18rem;">
+                  <img src="{% static 'img/s3.jpg' %}" class="card-img-top" alt="Book 3">
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+        <!-- Carousel End -->
+
+        <img src="{% static 'img/stand.png' %}" alt=".." style="width:100%;"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES SECTION -->
+<div class="container my-5">
+  <div class="row text-center">
+    <div class="col-md-3 mb-4">
+      <i class="fas fa-shipping-fast fa-2x text-primary"></i>
+      <h5 class="mt-2">Free Shipping</h5>
+    </div>
+    <div class="col-md-3 mb-4">
+      <i class="fas fa-undo fa-2x text-success"></i>
+      <h5 class="mt-2">Easy Return</h5>
+    </div>
+    <div class="col-md-3 mb-4">
+      <i class="fas fa-lock fa-2x text-danger"></i>
+      <h5 class="mt-2">Secure Payment</h5>
+    </div>
+    <div class="col-md-3 mb-4">
+      <i class="fas fa-headset fa-2x text-warning"></i>
+      <h5 class="mt-2">24/7 Support</h5>
+    </div>
+  </div>
+</div>
+
+<!-- FIXED IMAGE SECTION -->
+<div class="fixed-image my-5 text-center text-white position-relative">
+  <img src="{% static 'img/offer.jpg' %}" alt=".." style="height:400px; width:100%;"/>
+  <div class="fixed-overlay position-absolute w-100 h-100" style="background: rgba(0,0,0,0.5); top: 0; left: 0;"></div>
+</div>
+
+<!-- SPLIDE SLIDER 1 (Featured Books) -->
+<div class="container my-5">
+  <h3 class="text-center mb-4"><b>Featured Books</b></h3>
+  <section id="book-slider-1" class="splide" aria-label="Books Slider">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {% for b in new_arrivals %}
+        <li class="splide__slide">
+          <div class="card border-0 shadow-sm h-100" style="width: 100%; max-width: 250px; margin: auto;">
+            {% if b.cover_image %}
+            <img src="{{ b.cover_image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ b.title }}">
+            {% else %}
+            <img src="{% static 'img/b1.jpg' %}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Default Image">
+            {% endif %}
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ b.title }}</h5>
+              <p class="card-text text-success fw-bold mb-0">&#8377;{{ b.price }}</p>
+              {% if b.original_price %}
+              <p class="text-muted" style="text-decoration: line-through;">&#8377;{{ b.original_price }}</p>
+              {% endif %}
+              <a href="{% url 'book_details' id=b.id %}" class="btn btn-success btn-sm mt-2">Add to Cart</a>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+</div>
+
+<!-- SPLIDE SLIDER 2 (More Featured Books) -->
+<div class="container my-5">
+  <h3 class="text-center mb-4"><b>More Featured Books</b></h3>
+  <section id="book-slider-2" class="splide" aria-label="Books Slider">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {% for b in new_arrivals %}
+        <li class="splide__slide">
+          <div class="card border-0 shadow-sm h-100" style="width: 100%; max-width: 250px1; margin: auto;">
+            {% if b.cover %}
+            <img src="{{ b.cover_image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ b.title }}">
+            {% else %}
+            <img src="{% static 'img/b1.jpg' %}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Default Image">
+            {% endif %}
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ b.title }}</h5>
+              <p class="card-text text-success fw-bold mb-0">&#8377;{{ b.price }}</p>
+              {% if b.original_price %}
+              <p class="text-muted" style="text-decoration: line-through;">&#8377;{{ b.original_price }}</p>
+              {% endif %}
+              <a href="{% url 'book_details' id=b.id %}" class="btn btn-success btn-sm mt-2">Add to Cart</a>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+</div>
+<!--Attachment image start-->
+<div class="row mt-5">
+  <div class="col-sm-12" id="fix">
+    <div class="row mx-auto">
+      <h3 class="text-center">Subscribe For Letest Update</h3>
+      <input type="email" name="email" id="mail" placeholder="Enter you Email" style="height:50px; width:70%;" class="mx-auto"/>
+     <button class="btn btn-success mx-auto mt-5" style="height:50px; width:40%;">Subscribe</button>
+    </div>
+  </div>
+</div>
+<!--Attachment image end-->
+<!---New Arrival Start---->
+<h1 class="text-center mt-5">New Arrivals</h1>
+
+ <div class="col-sm-11 mx-auto mt-5">
+        <!-- Carousel Start -->
+        <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for i in "123"|make_list %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <div class="d-flex justify-content-center">
+                <div class="card mx-3" style="width: 18rem;">
+                  <img src="{% static 'img/s1.jpg' %}" class="card-img-top" alt="Book 1">
+                  <h4 class="text-center">Time to Explore</h4>
+                  <h5 class="text-danger text-center">₹ 250/- <strike>₹370</strike></h5>
+                  <button class="btn btn-success mt-3">Add To Cart</button>
+                </div>
+                <div class="card mx-3" style="width: 18rem;">
+                  <img src="{% static 'img/s2.jpg' %}" class="card-img-top" alt="Book 2">
+                   <h4 class="text-center">Conservation is Life</h4>
+                  <h5 class="text-danger text-center">₹ 340/- <strike>₹450</strike></h5>
+                  <button class="btn btn-success mt-3">Add To Cart</button>
+                </div>
+                <div class="card mx-3" style="width: 18rem;">
+                  <img src="{% static 'img/s3.jpg' %}" class="card-img-top" alt="Book 3">
+                   <h4 class="text-center">The Family Time</h4>
+                  <h5 class="text-danger text-center">₹ 299/- <strike>₹530</strike></h5>
+                  <button class="btn btn-success mt-3">Add To Cart</button>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+        <!-- Carousel End -->
+  </div>
+<!-----New Arriabal End---->
+<!-----New Arriabal Start Again---->
+      <div class="col-sm-11 mx-auto mt-5">
+        <!-- Carousel Start -->
+        <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for i in "123"|make_list %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <div class="d-flex justify-content-center">
+                <div class="card mx-3" style="width: 18rem;">
+                  <img src="{% static 'img/s5.jpg' %}" class="card-img-top" alt="Book 1">
+                  <h4 class="text-center">Time to Explore</h4>
+                  <h5 class="text-danger text-center">₹ 250/- <strike>₹370</strike></h5>
+                  <button class="btn btn-success mt-3">Add To Cart</button>
+                </div>
+                <div class="card mx-3" style="width: 18rem;">
+                  <img src="{% static 'img/s4.jpg' %}" class="card-img-top" alt="Book 2">
+                   <h4 class="text-center">Conservation is Life</h4>
+                  <h5 class="text-danger text-center">₹ 340/- <strike>₹450</strike></h5>
+                  <button class="btn btn-success mt-3">Add To Cart</button>
+                </div>
+                <div class="card mx-3" style="width: 18rem;">
+                  <img src="{% static 'img/s1.jpg' %}" class="card-img-top" alt="Book 3">
+                   <h4 class="text-center">The Family Time</h4>
+                  <h5 class="text-danger text-center">₹ 299/- <strike>₹530</strike></h5>
+                  <button class="btn btn-success mt-3">Add To Cart</button>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+        <!-- Carousel End -->
+  </div>
+  <br/>  <br/>  <br/>
+  <hr/>
+<!-----New Arriabal End Again---->
+<!-----Client Review section start------>
+<!-- Bootstrap 5 required -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container my-5">
+  <h2 class="text-center mb-4">What Our Clients Say</h2>
+    <br/>  <br/>  <br/>
+
+  <div id="clientCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="row">
+          <!-- Card 1 -->
+          <div class="col-md-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4 text-center">
+              <img src="{% static 'img/cg1.jpg' %}" class="rounded-circle mx-auto" alt="Client 1" style="height:100px;">
+              <h5 class="fw-bold">Ragini Yadav</h5>
+              <p>"Great experience! Very professional and supportive team."</p>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="col-md-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4 text-center">
+              <img src="{% static 'img/cm1.jpg' %}" class="rounded-circle mx-auto" alt="Client 2" style="height:100px;">
+              <h5 class="fw-bold">Amit Verma</h5>
+              <p>"Quick response and beautiful results. Highly recommended!"</p>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="col-md-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4 text-center">
+              <img src="{% static 'img/cg2.jpg' %}" class="rounded-circle mx-auto" alt="Client 3" style="height:100px;">
+              <h5 class="fw-bold">Priya Singh</h5>
+              <p>"Smooth process and creative execution. Will hire again!"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4 text-center">
+              <img src="{% static 'img/cm2.jpg' %}" class="rounded-circle mx-auto mb-3" alt="Client 4" style="height:100px;">
+              <h5 class="fw-bold">Rohit Sinha</h5>
+              <p>"Impressed by the professionalism and communication."</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4 text-center">
+              <img src="{% static 'img/cg3.jpg' %}" class="rounded-circle mx-auto mb-3" alt="Client 5" style="height:100px;">
+              <h5 class="fw-bold">Neha Mehta</h5>
+              <p>"Very creative team. Loved working with them!"</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4 text-center">
+              <img src="{% static 'img/cm3.jpg' %}" class="rounded-circle mx-auto mb-3" alt="Client 6">
+              <h5 class="fw-bold">Anil Kapoor</h5>
+              <p>"Excellent delivery. The team was fast and efficient."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4 text-center">
+              <img src="https://via.placeholder.com/100" class="rounded-circle mx-auto mb-3" alt="Client 7">
+              <h5 class="fw-bold">Simran Kaur</h5>
+              <p>"I love the final output. Thank you for your hard work!"</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4 text-center">
+              <img src="https://via.placeholder.com/100" class="rounded-circle mx-auto mb-3" alt="Client 8">
+              <h5 class="fw-bold">Nikhil Joshi</h5>
+              <p>"Best experience ever. They truly care about clients."</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4 text-center">
+              <img src="https://via.placeholder.com/100" class="rounded-circle mx-auto mb-3" alt="Client 9">
+              <h5 class="fw-bold">Alisha Roy</h5>
+              <p>"Highly satisfied. The result exceeded my expectations."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Carousel controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#clientCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#clientCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</div>
+<!------Clieny Review section end------>
+
+{% endblock %}
+
+{% block extra_js %}
+<!-- SplideJS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Splide('#book-slider-1', {
+      type: 'loop',
+      perPage: 4,
+      gap: '1rem',
+      autoplay: true,
+      pauseOnHover: true,
+      breakpoints: {
+        1200: { perPage: 3 },
+        768: { perPage: 2 },
+        480: { perPage: 1 }
+      }
+    }).mount();
+
+    new Splide('#book-slider-2', {
+      type: 'loop',
+      perPage: 4,
+      gap: '1rem',
+      autoplay: true,
+      pauseOnHover: true,
+      breakpoints: {
+        1200: { perPage: 3 },
+        768: { perPage: 2 },
+        480: { perPage: 1 }
+      }
+    }).mount();
+  });
+</script>
+{% endblock %}

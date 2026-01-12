@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* Sirf is page ka CSS yahan */
+      /* ===== Background Animation ===== */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 60vh;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, #f6d365, #fda085, #a1c4fd, #c2e9fb);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .site-logo {
+      text-align: center;
+      margin: 30px 0 10px;
+    }
+
+    .site-logo img {
+      height: 70px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .site-navbar {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    .site-navbar a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .site-navbar a:hover {
+      color: #222;
+      text-decoration: underline;
+    }
+
+    .main-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 15px;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+      animation: slideUp 1s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .login-logo i {
+      font-size: 48px;
+      color: #27ae60;
+    }
+
+    .login-card h4 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .login-card p {
+      text-align: center;
+      color: #636e72;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .btn-dark {
+      background-color: #2d3436;
+      border: none;
+    }
+
+    .btn-dark:hover {
+      background-color: #000;
+      transform: scale(1.05);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .bottom-link {
+      margin-top: 12px;
+      text-align: right;
+    }
+
+    .bottom-link a {
+      color: #0984e3;
+      text-decoration: none;
+    }
+
+    .bottom-link a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #dfe6e9;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #81ecec;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /*  INPUT ANIMATION  */
+    .input-wrapper {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .animated-input {
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid #ccc;
+      border-radius: 0;
+      box-shadow: none;
+      transition: border-color 0.4s ease-in-out;
+    }
+
+    .animated-input:focus {
+      border-bottom: 2px solid #27ae60;
+      box-shadow: none;
+      outline: none;
+    }
+
+    .form-floating > label {
+      color: #555;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .animated-input:focus + label {
+      color: #27ae60;
+      transform: translateY(-10px);
+      font-size: 0.9rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Login form ya page content yahan daal do -->
+  <!--  Admin Login -->
+  <div class="main-container">
+    <div class="login-card">
+      <div class="login-logo">
+        <i class="fas fa-book-open-reader"></i>
+      </div>
+      <h4>Welcome Admin</h4>
+      <p>Access your Bookstore Panel</p>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="form-floating mb-3 input-wrapper">
+          <input type="text" name="username" class="form-control animated-input" id="floatingInput" placeholder="admin@example.com" required>
+          <label for="floatingInput">Username or Email</label>
+        </div>
+        <div class="form-floating mb-4 input-wrapper">
+          <input type="password" name="password" class="form-control animated-input" id="floatingPassword" placeholder="Password" required>
+          <label for="floatingPassword">Password</label>
+        </div>
+        <button type="submit" class="btn btn-dark w-100">Login</button>
+      </form>
+      <div class="bottom-link">
+        <a href="{% url 'index' %}">&larr; Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+{% block admin %}
+
+{% block extra_css %}
+<style>
+  body {
+    background: linear-gradient(-45deg, #f6d365, #fda085, #a1c4fd, #c2e9fb);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  h1 {
+    color: #333;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .table {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+  }
+
+  .table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .btn {
+    border-radius: 20px;
+  }
+</style>
+{% endblock %}
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>View Book</h1>
+    <table class="table">
+      <tr>
+        <th>S.no.</th>
+         <th>Titel</th>
+         <th>Author</th> 
+         <th>Book Category</th> 
+         <th>Original price</th>
+         <th>Price</th> 
+         <th>Publish Date</th> 
+         <th>Language</th> 
+         <th>Cover Image</th>
+          <th>Added At</th>
+          <th>Action</th>
+      </tr>
+      {%  for b in books  %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+         <td>{{ b.title }}</td> 
+         <td>{{ b.author }}</td> 
+         <td>{{ b.category.name }}</td>
+         <td>{{ b.original_price }}</td>
+         <td>{{ b.price }}</td>
+         <td>{{ b.published_date }}</td>
+          <td>{{ b.Language }}</td> 
+          <td>
+            {% if b.cover_image %}
+            <img src="b.cover image_url" alt="cover" height="100">
+            {% else %}
+            NO Cover Image
+            {% endif %}
+          <td>
+          <td>{{ b.stock }}</td>
+          <td>{{ b.created_at }}</td> 
+          <td>
+            <a href="#" class="btn btn-sm btn-danger"><i class="ti ti-trash">Delete</i></a>
+            <a href="#" class="btn btn-sm btn-info">Edit<i class="ti ti-edit"></i></a>
+          </td>
+          
+         
+      </tr>
+      {% endfor %}
+    </table>
+    </div>
+</div>
+
+
+
+{% endblock %}
