@@ -35,6 +35,7 @@ This project allows users to browse books, register/login, and manage their shop
 ```
 obsprojecttest/
 │── adminapp/
+│── mainapp/
 │── userapp/
 │── templates/
 │── static/
